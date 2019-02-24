@@ -121,10 +121,7 @@ class Softmax(object):
     loss /= X.shape[0]
     
     base = np.exp(np.matmul(self.W, X.T)) / np.sum(np.exp(np.matmul(X, self.W.T)), axis=1)
-    print(base.shape)
-    y[0] = 12
     base[y,np.arange(X.shape[0])] -= 1
-    print(base[y])
     grad = np.matmul(base, X)
     grad /= X.shape[0]
     # ================================================================ #

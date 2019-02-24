@@ -1,0 +1,559 @@
+layer_dims = [600, 600, 600, 600]
+weight_scale = 0.01
+learning_rate = 1e-4
+lr_decay = 0.90
+
+model = FullyConnectedNet(layer_dims, weight_scale=weight_scale,
+                          dropout=0.65, reg=0.0, use_batchnorm=True)
+
+solver = Solver(model, data,
+                num_epochs=50, batch_size=100,
+                update_rule='adam',
+                optim_config={
+                  'learning_rate': learning_rate,
+                },
+                lr_decay=lr_decay,
+                verbose=True, print_every=50)
+solver.train()
+
+(Iteration 1 / 24500) loss: 2.336646
+(Epoch 0 / 50) train acc: 0.126000; val_acc: 0.129000
+(Iteration 51 / 24500) loss: 1.980057
+(Iteration 101 / 24500) loss: 1.943215
+(Iteration 151 / 24500) loss: 1.849622
+(Iteration 201 / 24500) loss: 1.715471
+(Iteration 251 / 24500) loss: 1.592220
+(Iteration 301 / 24500) loss: 1.627494
+(Iteration 351 / 24500) loss: 1.662656
+(Iteration 401 / 24500) loss: 1.683061
+(Iteration 451 / 24500) loss: 1.534410
+(Epoch 1 / 50) train acc: 0.438000; val_acc: 0.464000
+(Iteration 501 / 24500) loss: 1.608517
+(Iteration 551 / 24500) loss: 1.609538
+(Iteration 601 / 24500) loss: 1.521050
+(Iteration 651 / 24500) loss: 1.630844
+(Iteration 701 / 24500) loss: 1.356341
+(Iteration 751 / 24500) loss: 1.516202
+(Iteration 801 / 24500) loss: 1.585962
+(Iteration 851 / 24500) loss: 1.652921
+(Iteration 901 / 24500) loss: 1.458017
+(Iteration 951 / 24500) loss: 1.547876
+(Epoch 2 / 50) train acc: 0.515000; val_acc: 0.486000
+(Iteration 1001 / 24500) loss: 1.563107
+(Iteration 1051 / 24500) loss: 1.407871
+(Iteration 1101 / 24500) loss: 1.497544
+(Iteration 1151 / 24500) loss: 1.604112
+(Iteration 1201 / 24500) loss: 1.474592
+(Iteration 1251 / 24500) loss: 1.483732
+(Iteration 1301 / 24500) loss: 1.336273
+(Iteration 1351 / 24500) loss: 1.714689
+(Iteration 1401 / 24500) loss: 1.414743
+(Iteration 1451 / 24500) loss: 1.397573
+(Epoch 3 / 50) train acc: 0.556000; val_acc: 0.510000
+(Iteration 1501 / 24500) loss: 1.583590
+(Iteration 1551 / 24500) loss: 1.323804
+(Iteration 1601 / 24500) loss: 1.386561
+(Iteration 1651 / 24500) loss: 1.430309
+(Iteration 1701 / 24500) loss: 1.244910
+(Iteration 1751 / 24500) loss: 1.420446
+(Iteration 1801 / 24500) loss: 1.391033
+(Iteration 1851 / 24500) loss: 1.238044
+(Iteration 1901 / 24500) loss: 1.242088
+(Iteration 1951 / 24500) loss: 1.473838
+(Epoch 4 / 50) train acc: 0.558000; val_acc: 0.522000
+(Iteration 2001 / 24500) loss: 1.376874
+(Iteration 2051 / 24500) loss: 1.274521
+(Iteration 2101 / 24500) loss: 1.233209
+(Iteration 2151 / 24500) loss: 1.133807
+(Iteration 2201 / 24500) loss: 1.229873
+(Iteration 2251 / 24500) loss: 1.447591
+(Iteration 2301 / 24500) loss: 1.154329
+(Iteration 2351 / 24500) loss: 1.338346
+(Iteration 2401 / 24500) loss: 1.266131
+(Epoch 5 / 50) train acc: 0.588000; val_acc: 0.523000
+(Iteration 2451 / 24500) loss: 1.216650
+(Iteration 2501 / 24500) loss: 1.284506
+(Iteration 2551 / 24500) loss: 1.295542
+(Iteration 2601 / 24500) loss: 1.463577
+(Iteration 2651 / 24500) loss: 1.317523
+(Iteration 2701 / 24500) loss: 1.223276
+(Iteration 2751 / 24500) loss: 1.356206
+(Iteration 2801 / 24500) loss: 1.200514
+(Iteration 2851 / 24500) loss: 1.171335
+(Iteration 2901 / 24500) loss: 1.317201
+(Epoch 6 / 50) train acc: 0.613000; val_acc: 0.539000
+(Iteration 2951 / 24500) loss: 1.150104
+(Iteration 3001 / 24500) loss: 1.217261
+(Iteration 3051 / 24500) loss: 1.288336
+(Iteration 3101 / 24500) loss: 1.123096
+(Iteration 3151 / 24500) loss: 1.218238
+(Iteration 3201 / 24500) loss: 1.261005
+(Iteration 3251 / 24500) loss: 1.291658
+(Iteration 3301 / 24500) loss: 1.186849
+(Iteration 3351 / 24500) loss: 1.213687
+(Iteration 3401 / 24500) loss: 1.132868
+(Epoch 7 / 50) train acc: 0.577000; val_acc: 0.549000
+(Iteration 3451 / 24500) loss: 1.170107
+(Iteration 3501 / 24500) loss: 1.408046
+(Iteration 3551 / 24500) loss: 1.176974
+(Iteration 3601 / 24500) loss: 1.299519
+(Iteration 3651 / 24500) loss: 1.124058
+(Iteration 3701 / 24500) loss: 1.178056
+(Iteration 3751 / 24500) loss: 1.260913
+(Iteration 3801 / 24500) loss: 1.414544
+(Iteration 3851 / 24500) loss: 1.096713
+(Iteration 3901 / 24500) loss: 1.126714
+(Epoch 8 / 50) train acc: 0.604000; val_acc: 0.553000
+(Iteration 3951 / 24500) loss: 1.232696
+(Iteration 4001 / 24500) loss: 1.242381
+(Iteration 4051 / 24500) loss: 1.279157
+(Iteration 4101 / 24500) loss: 1.238111
+(Iteration 4151 / 24500) loss: 1.105892
+(Iteration 4201 / 24500) loss: 1.219185
+(Iteration 4251 / 24500) loss: 1.329344
+(Iteration 4301 / 24500) loss: 1.161424
+(Iteration 4351 / 24500) loss: 1.219698
+(Iteration 4401 / 24500) loss: 1.242950
+(Epoch 9 / 50) train acc: 0.586000; val_acc: 0.548000
+(Iteration 4451 / 24500) loss: 1.249879
+(Iteration 4501 / 24500) loss: 1.111218
+(Iteration 4551 / 24500) loss: 1.360478
+(Iteration 4601 / 24500) loss: 1.062794
+(Iteration 4651 / 24500) loss: 1.219885
+(Iteration 4701 / 24500) loss: 1.254918
+(Iteration 4751 / 24500) loss: 1.121473
+(Iteration 4801 / 24500) loss: 1.272840
+(Iteration 4851 / 24500) loss: 1.398153
+(Epoch 10 / 50) train acc: 0.644000; val_acc: 0.554000
+(Iteration 4901 / 24500) loss: 0.969959
+(Iteration 4951 / 24500) loss: 1.349080
+(Iteration 5001 / 24500) loss: 1.022738
+(Iteration 5051 / 24500) loss: 1.054589
+(Iteration 5101 / 24500) loss: 1.289124
+(Iteration 5151 / 24500) loss: 1.155215
+(Iteration 5201 / 24500) loss: 1.196783
+(Iteration 5251 / 24500) loss: 1.108116
+(Iteration 5301 / 24500) loss: 1.096013
+(Iteration 5351 / 24500) loss: 1.224398
+(Epoch 11 / 50) train acc: 0.653000; val_acc: 0.559000
+(Iteration 5401 / 24500) loss: 1.161138
+(Iteration 5451 / 24500) loss: 1.073957
+(Iteration 5501 / 24500) loss: 1.008197
+(Iteration 5551 / 24500) loss: 1.069152
+(Iteration 5601 / 24500) loss: 1.089631
+(Iteration 5651 / 24500) loss: 1.158548
+(Iteration 5701 / 24500) loss: 1.286786
+(Iteration 5751 / 24500) loss: 1.098238
+(Iteration 5801 / 24500) loss: 1.298719
+(Iteration 5851 / 24500) loss: 1.340268
+(Epoch 12 / 50) train acc: 0.659000; val_acc: 0.568000
+(Iteration 5901 / 24500) loss: 1.071465
+(Iteration 5951 / 24500) loss: 1.107706
+(Iteration 6001 / 24500) loss: 0.989182
+(Iteration 6051 / 24500) loss: 1.059373
+(Iteration 6101 / 24500) loss: 1.095990
+(Iteration 6151 / 24500) loss: 1.097620
+(Iteration 6201 / 24500) loss: 1.298122
+(Iteration 6251 / 24500) loss: 1.048848
+(Iteration 6301 / 24500) loss: 1.063270
+(Iteration 6351 / 24500) loss: 1.108017
+(Epoch 13 / 50) train acc: 0.667000; val_acc: 0.551000
+(Iteration 6401 / 24500) loss: 0.863905
+(Iteration 6451 / 24500) loss: 1.237530
+(Iteration 6501 / 24500) loss: 1.036131
+(Iteration 6551 / 24500) loss: 1.132210
+(Iteration 6601 / 24500) loss: 1.198095
+(Iteration 6651 / 24500) loss: 1.130676
+(Iteration 6701 / 24500) loss: 0.949978
+(Iteration 6751 / 24500) loss: 1.297482
+(Iteration 6801 / 24500) loss: 1.303625
+(Iteration 6851 / 24500) loss: 1.169991
+(Epoch 14 / 50) train acc: 0.668000; val_acc: 0.571000
+(Iteration 6901 / 24500) loss: 1.078754
+(Iteration 6951 / 24500) loss: 1.058333
+(Iteration 7001 / 24500) loss: 1.236144
+(Iteration 7051 / 24500) loss: 1.140889
+(Iteration 7101 / 24500) loss: 1.341729
+(Iteration 7151 / 24500) loss: 1.246930
+(Iteration 7201 / 24500) loss: 1.057316
+(Iteration 7251 / 24500) loss: 1.000712
+(Iteration 7301 / 24500) loss: 1.337408
+(Epoch 15 / 50) train acc: 0.676000; val_acc: 0.575000
+(Iteration 7351 / 24500) loss: 1.163802
+(Iteration 7401 / 24500) loss: 1.153312
+(Iteration 7451 / 24500) loss: 1.172444
+(Iteration 7501 / 24500) loss: 0.981104
+(Iteration 7551 / 24500) loss: 1.428341
+(Iteration 7601 / 24500) loss: 1.031029
+(Iteration 7651 / 24500) loss: 1.035522
+(Iteration 7701 / 24500) loss: 1.011977
+(Iteration 7751 / 24500) loss: 1.058405
+(Iteration 7801 / 24500) loss: 1.118882
+(Epoch 16 / 50) train acc: 0.686000; val_acc: 0.566000
+(Iteration 7851 / 24500) loss: 1.166988
+(Iteration 7901 / 24500) loss: 1.126027
+(Iteration 7951 / 24500) loss: 1.157071
+(Iteration 8001 / 24500) loss: 1.161396
+(Iteration 8051 / 24500) loss: 1.042075
+(Iteration 8101 / 24500) loss: 1.123967
+(Iteration 8151 / 24500) loss: 1.078381
+(Iteration 8201 / 24500) loss: 1.141858
+(Iteration 8251 / 24500) loss: 1.072642
+(Iteration 8301 / 24500) loss: 1.015413
+(Epoch 17 / 50) train acc: 0.682000; val_acc: 0.573000
+(Iteration 8351 / 24500) loss: 1.175620
+(Iteration 8401 / 24500) loss: 1.039874
+(Iteration 8451 / 24500) loss: 1.249988
+(Iteration 8501 / 24500) loss: 1.039524
+(Iteration 8551 / 24500) loss: 1.173631
+(Iteration 8601 / 24500) loss: 1.116162
+(Iteration 8651 / 24500) loss: 1.052348
+(Iteration 8701 / 24500) loss: 1.002829
+(Iteration 8751 / 24500) loss: 0.952765
+(Iteration 8801 / 24500) loss: 1.149941
+(Epoch 18 / 50) train acc: 0.692000; val_acc: 0.572000
+(Iteration 8851 / 24500) loss: 1.040602
+(Iteration 8901 / 24500) loss: 1.079349
+(Iteration 8951 / 24500) loss: 1.059253
+(Iteration 9001 / 24500) loss: 1.016420
+(Iteration 9051 / 24500) loss: 1.029844
+(Iteration 9101 / 24500) loss: 1.079202
+(Iteration 9151 / 24500) loss: 1.151151
+(Iteration 9201 / 24500) loss: 0.957249
+(Iteration 9251 / 24500) loss: 1.254145
+(Iteration 9301 / 24500) loss: 0.890088
+(Epoch 19 / 50) train acc: 0.692000; val_acc: 0.562000
+(Iteration 9351 / 24500) loss: 1.130009
+(Iteration 9401 / 24500) loss: 1.173767
+(Iteration 9451 / 24500) loss: 1.264027
+(Iteration 9501 / 24500) loss: 1.206657
+(Iteration 9551 / 24500) loss: 1.102276
+(Iteration 9601 / 24500) loss: 1.077734
+(Iteration 9651 / 24500) loss: 0.857584
+(Iteration 9701 / 24500) loss: 1.228284
+(Iteration 9751 / 24500) loss: 0.996390
+(Epoch 20 / 50) train acc: 0.688000; val_acc: 0.578000
+(Iteration 9801 / 24500) loss: 1.076737
+(Iteration 9851 / 24500) loss: 0.957772
+(Iteration 9901 / 24500) loss: 1.089433
+(Iteration 9951 / 24500) loss: 1.083803
+(Iteration 10001 / 24500) loss: 1.000422
+(Iteration 10051 / 24500) loss: 1.052912
+(Iteration 10101 / 24500) loss: 1.103125
+(Iteration 10151 / 24500) loss: 1.064836
+(Iteration 10201 / 24500) loss: 1.114388
+(Iteration 10251 / 24500) loss: 1.289524
+(Epoch 21 / 50) train acc: 0.719000; val_acc: 0.576000
+(Iteration 10301 / 24500) loss: 1.077182
+(Iteration 10351 / 24500) loss: 0.971941
+(Iteration 10401 / 24500) loss: 1.105490
+(Iteration 10451 / 24500) loss: 1.000608
+(Iteration 10501 / 24500) loss: 1.079659
+(Iteration 10551 / 24500) loss: 1.283288
+(Iteration 10601 / 24500) loss: 1.124462
+(Iteration 10651 / 24500) loss: 1.038997
+(Iteration 10701 / 24500) loss: 1.044374
+(Iteration 10751 / 24500) loss: 0.991707
+(Epoch 22 / 50) train acc: 0.703000; val_acc: 0.575000
+(Iteration 10801 / 24500) loss: 1.130152
+(Iteration 10851 / 24500) loss: 1.160499
+(Iteration 10901 / 24500) loss: 1.029477
+(Iteration 10951 / 24500) loss: 1.018550
+(Iteration 11001 / 24500) loss: 1.012387
+(Iteration 11051 / 24500) loss: 1.136962
+(Iteration 11101 / 24500) loss: 1.047742
+(Iteration 11151 / 24500) loss: 1.040664
+(Iteration 11201 / 24500) loss: 1.043064
+(Iteration 11251 / 24500) loss: 0.969420
+(Epoch 23 / 50) train acc: 0.700000; val_acc: 0.568000
+(Iteration 11301 / 24500) loss: 0.891508
+(Iteration 11351 / 24500) loss: 1.010771
+(Iteration 11401 / 24500) loss: 0.963976
+(Iteration 11451 / 24500) loss: 0.836600
+(Iteration 11501 / 24500) loss: 1.016042
+(Iteration 11551 / 24500) loss: 1.186979
+(Iteration 11601 / 24500) loss: 1.020096
+(Iteration 11651 / 24500) loss: 0.976697
+(Iteration 11701 / 24500) loss: 0.877648
+(Iteration 11751 / 24500) loss: 0.911359
+(Epoch 24 / 50) train acc: 0.728000; val_acc: 0.569000
+(Iteration 11801 / 24500) loss: 1.072879
+(Iteration 11851 / 24500) loss: 0.895395
+(Iteration 11901 / 24500) loss: 0.830479
+(Iteration 11951 / 24500) loss: 1.071030
+(Iteration 12001 / 24500) loss: 0.922286
+(Iteration 12051 / 24500) loss: 1.080176
+(Iteration 12101 / 24500) loss: 1.072886
+(Iteration 12151 / 24500) loss: 1.088115
+(Iteration 12201 / 24500) loss: 1.155201
+(Epoch 25 / 50) train acc: 0.703000; val_acc: 0.577000
+(Iteration 12251 / 24500) loss: 0.902331
+(Iteration 12301 / 24500) loss: 0.910955
+(Iteration 12351 / 24500) loss: 1.118422
+(Iteration 12401 / 24500) loss: 0.994821
+(Iteration 12451 / 24500) loss: 1.114158
+(Iteration 12501 / 24500) loss: 1.026458
+(Iteration 12551 / 24500) loss: 1.059044
+(Iteration 12601 / 24500) loss: 0.919168
+(Iteration 12651 / 24500) loss: 1.192139
+(Iteration 12701 / 24500) loss: 0.914927
+(Epoch 26 / 50) train acc: 0.719000; val_acc: 0.573000
+(Iteration 12751 / 24500) loss: 1.110658
+(Iteration 12801 / 24500) loss: 0.982164
+(Iteration 12851 / 24500) loss: 1.057978
+(Iteration 12901 / 24500) loss: 0.886620
+(Iteration 12951 / 24500) loss: 1.159768
+(Iteration 13001 / 24500) loss: 0.880234
+(Iteration 13051 / 24500) loss: 1.176111
+(Iteration 13101 / 24500) loss: 1.102148
+(Iteration 13151 / 24500) loss: 1.113983
+(Iteration 13201 / 24500) loss: 0.904128
+(Epoch 27 / 50) train acc: 0.727000; val_acc: 0.575000
+(Iteration 13251 / 24500) loss: 1.204448
+(Iteration 13301 / 24500) loss: 0.945358
+(Iteration 13351 / 24500) loss: 0.958298
+(Iteration 13401 / 24500) loss: 1.026427
+(Iteration 13451 / 24500) loss: 0.961413
+(Iteration 13501 / 24500) loss: 1.054401
+(Iteration 13551 / 24500) loss: 0.931875
+(Iteration 13601 / 24500) loss: 1.065713
+(Iteration 13651 / 24500) loss: 1.082351
+(Iteration 13701 / 24500) loss: 1.043370
+(Epoch 28 / 50) train acc: 0.709000; val_acc: 0.569000
+(Iteration 13751 / 24500) loss: 0.842909
+(Iteration 13801 / 24500) loss: 0.915200
+(Iteration 13851 / 24500) loss: 1.264489
+(Iteration 13901 / 24500) loss: 1.098958
+(Iteration 13951 / 24500) loss: 1.049440
+(Iteration 14001 / 24500) loss: 1.149581
+(Iteration 14051 / 24500) loss: 0.944496
+(Iteration 14101 / 24500) loss: 1.073809
+(Iteration 14151 / 24500) loss: 1.145157
+(Iteration 14201 / 24500) loss: 0.925850
+(Epoch 29 / 50) train acc: 0.717000; val_acc: 0.575000
+(Iteration 14251 / 24500) loss: 1.008188
+(Iteration 14301 / 24500) loss: 1.031692
+(Iteration 14351 / 24500) loss: 0.911676
+(Iteration 14401 / 24500) loss: 0.965871
+(Iteration 14451 / 24500) loss: 0.998605
+(Iteration 14501 / 24500) loss: 1.165618
+(Iteration 14551 / 24500) loss: 1.179925
+(Iteration 14601 / 24500) loss: 1.010390
+(Iteration 14651 / 24500) loss: 1.000725
+(Epoch 30 / 50) train acc: 0.704000; val_acc: 0.579000
+(Iteration 14701 / 24500) loss: 1.160435
+(Iteration 14751 / 24500) loss: 1.048589
+(Iteration 14801 / 24500) loss: 0.908526
+(Iteration 14851 / 24500) loss: 0.991872
+(Iteration 14901 / 24500) loss: 1.062897
+(Iteration 14951 / 24500) loss: 1.013496
+(Iteration 15001 / 24500) loss: 0.962843
+(Iteration 15051 / 24500) loss: 1.271981
+(Iteration 15101 / 24500) loss: 1.055779
+(Iteration 15151 / 24500) loss: 0.997282
+(Epoch 31 / 50) train acc: 0.759000; val_acc: 0.576000
+(Iteration 15201 / 24500) loss: 0.896389
+(Iteration 15251 / 24500) loss: 0.955077
+(Iteration 15301 / 24500) loss: 0.865872
+(Iteration 15351 / 24500) loss: 0.802567
+(Iteration 15401 / 24500) loss: 1.177413
+(Iteration 15451 / 24500) loss: 1.006823
+(Iteration 15501 / 24500) loss: 1.128674
+(Iteration 15551 / 24500) loss: 1.082563
+(Iteration 15601 / 24500) loss: 0.958453
+(Iteration 15651 / 24500) loss: 1.102408
+(Epoch 32 / 50) train acc: 0.679000; val_acc: 0.577000
+(Iteration 15701 / 24500) loss: 1.071526
+(Iteration 15751 / 24500) loss: 0.996544
+(Iteration 15801 / 24500) loss: 0.852021
+(Iteration 15851 / 24500) loss: 1.029264
+(Iteration 15901 / 24500) loss: 0.764260
+(Iteration 15951 / 24500) loss: 1.043511
+(Iteration 16001 / 24500) loss: 0.967185
+(Iteration 16051 / 24500) loss: 0.931748
+(Iteration 16101 / 24500) loss: 1.132586
+(Iteration 16151 / 24500) loss: 1.121728
+(Epoch 33 / 50) train acc: 0.736000; val_acc: 0.574000
+(Iteration 16201 / 24500) loss: 1.070419
+(Iteration 16251 / 24500) loss: 0.954348
+(Iteration 16301 / 24500) loss: 0.990794
+(Iteration 16351 / 24500) loss: 0.951881
+(Iteration 16401 / 24500) loss: 0.866634
+(Iteration 16451 / 24500) loss: 1.049219
+(Iteration 16501 / 24500) loss: 1.061397
+(Iteration 16551 / 24500) loss: 1.054167
+(Iteration 16601 / 24500) loss: 1.134940
+(Iteration 16651 / 24500) loss: 0.989754
+(Epoch 34 / 50) train acc: 0.720000; val_acc: 0.582000
+(Iteration 16701 / 24500) loss: 1.082686
+(Iteration 16751 / 24500) loss: 0.794033
+(Iteration 16801 / 24500) loss: 0.910699
+(Iteration 16851 / 24500) loss: 0.927541
+(Iteration 16901 / 24500) loss: 0.864484
+(Iteration 16951 / 24500) loss: 1.143598
+(Iteration 17001 / 24500) loss: 1.114706
+(Iteration 17051 / 24500) loss: 0.959526
+(Iteration 17101 / 24500) loss: 1.016199
+(Epoch 35 / 50) train acc: 0.752000; val_acc: 0.584000
+(Iteration 17151 / 24500) loss: 0.849598
+(Iteration 17201 / 24500) loss: 1.117565
+(Iteration 17251 / 24500) loss: 1.007647
+(Iteration 17301 / 24500) loss: 0.923637
+(Iteration 17351 / 24500) loss: 1.008732
+(Iteration 17401 / 24500) loss: 1.085815
+(Iteration 17451 / 24500) loss: 0.993858
+(Iteration 17501 / 24500) loss: 0.904493
+(Iteration 17551 / 24500) loss: 1.049555
+(Iteration 17601 / 24500) loss: 1.125481
+(Epoch 36 / 50) train acc: 0.732000; val_acc: 0.579000
+(Iteration 17651 / 24500) loss: 0.974602
+(Iteration 17701 / 24500) loss: 0.910327
+(Iteration 17751 / 24500) loss: 1.037947
+(Iteration 17801 / 24500) loss: 1.040516
+(Iteration 17851 / 24500) loss: 1.016375
+(Iteration 17901 / 24500) loss: 0.968493
+(Iteration 17951 / 24500) loss: 1.010403
+(Iteration 18001 / 24500) loss: 1.013032
+(Iteration 18051 / 24500) loss: 0.843247
+(Iteration 18101 / 24500) loss: 1.023913
+(Epoch 37 / 50) train acc: 0.718000; val_acc: 0.576000
+(Iteration 18151 / 24500) loss: 1.003354
+(Iteration 18201 / 24500) loss: 0.977882
+(Iteration 18251 / 24500) loss: 1.107097
+(Iteration 18301 / 24500) loss: 0.991016
+(Iteration 18351 / 24500) loss: 0.975215
+(Iteration 18401 / 24500) loss: 0.789142
+(Iteration 18451 / 24500) loss: 0.795830
+(Iteration 18501 / 24500) loss: 1.027401
+(Iteration 18551 / 24500) loss: 0.920401
+(Iteration 18601 / 24500) loss: 1.035455
+(Epoch 38 / 50) train acc: 0.729000; val_acc: 0.576000
+(Iteration 18651 / 24500) loss: 0.952799
+(Iteration 18701 / 24500) loss: 0.898033
+(Iteration 18751 / 24500) loss: 1.136836
+(Iteration 18801 / 24500) loss: 1.031683
+(Iteration 18851 / 24500) loss: 1.049381
+(Iteration 18901 / 24500) loss: 0.901289
+(Iteration 18951 / 24500) loss: 0.984295
+(Iteration 19001 / 24500) loss: 0.864352
+(Iteration 19051 / 24500) loss: 1.104048
+(Iteration 19101 / 24500) loss: 1.032453
+(Epoch 39 / 50) train acc: 0.742000; val_acc: 0.585000
+(Iteration 19151 / 24500) loss: 0.897110
+(Iteration 19201 / 24500) loss: 0.996052
+(Iteration 19251 / 24500) loss: 1.259011
+(Iteration 19301 / 24500) loss: 1.127734
+(Iteration 19351 / 24500) loss: 1.034467
+(Iteration 19401 / 24500) loss: 0.836516
+(Iteration 19451 / 24500) loss: 1.022396
+(Iteration 19501 / 24500) loss: 0.981092
+(Iteration 19551 / 24500) loss: 0.863570
+(Epoch 40 / 50) train acc: 0.754000; val_acc: 0.578000
+(Iteration 19601 / 24500) loss: 0.998990
+(Iteration 19651 / 24500) loss: 0.957867
+(Iteration 19701 / 24500) loss: 0.973720
+(Iteration 19751 / 24500) loss: 1.020403
+(Iteration 19801 / 24500) loss: 0.852157
+(Iteration 19851 / 24500) loss: 1.024936
+(Iteration 19901 / 24500) loss: 1.006476
+(Iteration 19951 / 24500) loss: 0.951839
+(Iteration 20001 / 24500) loss: 1.130368
+(Iteration 20051 / 24500) loss: 1.063434
+(Epoch 41 / 50) train acc: 0.739000; val_acc: 0.584000
+(Iteration 20101 / 24500) loss: 0.910575
+(Iteration 20151 / 24500) loss: 0.950961
+(Iteration 20201 / 24500) loss: 0.936036
+(Iteration 20251 / 24500) loss: 1.083838
+(Iteration 20301 / 24500) loss: 0.960285
+(Iteration 20351 / 24500) loss: 0.786590
+(Iteration 20401 / 24500) loss: 1.117148
+(Iteration 20451 / 24500) loss: 1.167974
+(Iteration 20501 / 24500) loss: 0.947268
+(Iteration 20551 / 24500) loss: 0.817892
+(Epoch 42 / 50) train acc: 0.729000; val_acc: 0.579000
+(Iteration 20601 / 24500) loss: 0.875527
+(Iteration 20651 / 24500) loss: 0.976358
+(Iteration 20701 / 24500) loss: 0.939662
+(Iteration 20751 / 24500) loss: 0.876393
+(Iteration 20801 / 24500) loss: 1.015136
+(Iteration 20851 / 24500) loss: 1.118441
+(Iteration 20901 / 24500) loss: 0.957047
+(Iteration 20951 / 24500) loss: 0.819290
+(Iteration 21001 / 24500) loss: 0.849146
+(Iteration 21051 / 24500) loss: 1.078759
+(Epoch 43 / 50) train acc: 0.755000; val_acc: 0.575000
+(Iteration 21101 / 24500) loss: 0.904541
+(Iteration 21151 / 24500) loss: 1.114009
+(Iteration 21201 / 24500) loss: 1.154647
+(Iteration 21251 / 24500) loss: 0.958176
+(Iteration 21301 / 24500) loss: 1.075940
+(Iteration 21351 / 24500) loss: 1.135306
+(Iteration 21401 / 24500) loss: 1.225665
+(Iteration 21451 / 24500) loss: 0.950235
+(Iteration 21501 / 24500) loss: 0.950872
+(Iteration 21551 / 24500) loss: 0.834221
+(Epoch 44 / 50) train acc: 0.734000; val_acc: 0.576000
+(Iteration 21601 / 24500) loss: 0.933794
+(Iteration 21651 / 24500) loss: 1.169998
+(Iteration 21701 / 24500) loss: 1.065587
+(Iteration 21751 / 24500) loss: 0.812276
+(Iteration 21801 / 24500) loss: 0.992611
+(Iteration 21851 / 24500) loss: 0.922520
+(Iteration 21901 / 24500) loss: 1.034152
+(Iteration 21951 / 24500) loss: 0.938803
+(Iteration 22001 / 24500) loss: 0.999629
+(Epoch 45 / 50) train acc: 0.735000; val_acc: 0.575000
+(Iteration 22051 / 24500) loss: 0.883387
+(Iteration 22101 / 24500) loss: 0.966351
+(Iteration 22151 / 24500) loss: 0.880053
+(Iteration 22201 / 24500) loss: 0.803191
+(Iteration 22251 / 24500) loss: 1.048091
+(Iteration 22301 / 24500) loss: 0.966463
+(Iteration 22351 / 24500) loss: 0.955369
+(Iteration 22401 / 24500) loss: 0.910366
+(Iteration 22451 / 24500) loss: 0.956003
+(Iteration 22501 / 24500) loss: 0.960742
+(Epoch 46 / 50) train acc: 0.723000; val_acc: 0.579000
+(Iteration 22551 / 24500) loss: 0.805887
+(Iteration 22601 / 24500) loss: 0.986909
+(Iteration 22651 / 24500) loss: 1.142098
+(Iteration 22701 / 24500) loss: 0.923213
+(Iteration 22751 / 24500) loss: 0.804657
+(Iteration 22801 / 24500) loss: 1.030962
+(Iteration 22851 / 24500) loss: 0.789589
+(Iteration 22901 / 24500) loss: 1.091966
+(Iteration 22951 / 24500) loss: 0.881361
+(Iteration 23001 / 24500) loss: 0.786811
+(Epoch 47 / 50) train acc: 0.737000; val_acc: 0.578000
+(Iteration 23051 / 24500) loss: 1.089680
+(Iteration 23101 / 24500) loss: 1.011263
+(Iteration 23151 / 24500) loss: 1.056227
+(Iteration 23201 / 24500) loss: 1.036519
+(Iteration 23251 / 24500) loss: 1.042416
+(Iteration 23301 / 24500) loss: 0.954677
+(Iteration 23351 / 24500) loss: 0.864032
+(Iteration 23401 / 24500) loss: 1.023307
+(Iteration 23451 / 24500) loss: 0.927141
+(Iteration 23501 / 24500) loss: 0.787012
+(Epoch 48 / 50) train acc: 0.721000; val_acc: 0.578000
+(Iteration 23551 / 24500) loss: 1.000839
+(Iteration 23601 / 24500) loss: 0.905724
+(Iteration 23651 / 24500) loss: 1.023575
+(Iteration 23701 / 24500) loss: 1.036644
+(Iteration 23751 / 24500) loss: 0.965968
+(Iteration 23801 / 24500) loss: 0.916648
+(Iteration 23851 / 24500) loss: 1.109962
+(Iteration 23901 / 24500) loss: 0.836832
+(Iteration 23951 / 24500) loss: 1.009300
+(Iteration 24001 / 24500) loss: 1.037148
+(Epoch 49 / 50) train acc: 0.741000; val_acc: 0.578000
+(Iteration 24051 / 24500) loss: 0.953992
+(Iteration 24101 / 24500) loss: 1.007842
+(Iteration 24151 / 24500) loss: 0.989529
+(Iteration 24201 / 24500) loss: 1.053818
+(Iteration 24251 / 24500) loss: 0.877080
+(Iteration 24301 / 24500) loss: 1.009806
+(Iteration 24351 / 24500) loss: 1.075072
+(Iteration 24401 / 24500) loss: 1.141030
+(Iteration 24451 / 24500) loss: 1.066228
+(Epoch 50 / 50) train acc: 0.752000; val_acc: 0.576000
