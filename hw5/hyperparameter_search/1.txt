@@ -1,0 +1,65 @@
+model = ThreeLayerConvNet(  filter_size=3,
+                            num_filters=128,
+                            weight_scale=0.001, 
+                            hidden_dim=1024, 
+                            reg=0.002)
+
+solver = Solver(model, data,
+                num_epochs=10, batch_size=128,
+                update_rule='adam',
+                optim_config={
+                  'learning_rate': 1e-3,
+                },
+                verbose=True, print_every=100)
+solver.train()
+
+(Iteration 1 / 3820) loss: 2.336171
+(Epoch 0 / 10) train acc: 0.127000; val_acc: 0.116000
+(Iteration 101 / 3820) loss: 1.865538
+(Iteration 201 / 3820) loss: 1.686002
+(Iteration 301 / 3820) loss: 1.413978
+(Epoch 1 / 10) train acc: 0.586000; val_acc: 0.541000
+(Iteration 401 / 3820) loss: 1.581505
+(Iteration 501 / 3820) loss: 1.579389
+(Iteration 601 / 3820) loss: 1.396823
+(Iteration 701 / 3820) loss: 1.260944
+(Epoch 2 / 10) train acc: 0.618000; val_acc: 0.556000
+(Iteration 801 / 3820) loss: 1.298367
+(Iteration 901 / 3820) loss: 1.231002
+(Iteration 1001 / 3820) loss: 1.189693
+(Iteration 1101 / 3820) loss: 1.211775
+(Epoch 3 / 10) train acc: 0.650000; val_acc: 0.576000
+(Iteration 1201 / 3820) loss: 1.063639
+(Iteration 1301 / 3820) loss: 1.284781
+(Iteration 1401 / 3820) loss: 1.129742
+(Iteration 1501 / 3820) loss: 1.125973
+(Epoch 4 / 10) train acc: 0.654000; val_acc: 0.616000
+(Iteration 1601 / 3820) loss: 1.125112
+(Iteration 1701 / 3820) loss: 1.296119
+(Iteration 1801 / 3820) loss: 0.987922
+(Iteration 1901 / 3820) loss: 1.033622
+(Epoch 5 / 10) train acc: 0.690000; val_acc: 0.602000
+(Iteration 2001 / 3820) loss: 1.277392
+(Iteration 2101 / 3820) loss: 1.354939
+(Iteration 2201 / 3820) loss: 1.137585
+(Epoch 6 / 10) train acc: 0.671000; val_acc: 0.617000
+(Iteration 2301 / 3820) loss: 1.129330
+(Iteration 2401 / 3820) loss: 0.874081
+(Iteration 2501 / 3820) loss: 1.402542
+(Iteration 2601 / 3820) loss: 0.917126
+(Epoch 7 / 10) train acc: 0.694000; val_acc: 0.600000
+(Iteration 2701 / 3820) loss: 1.128201
+(Iteration 2801 / 3820) loss: 1.128590
+(Iteration 2901 / 3820) loss: 0.997809
+(Iteration 3001 / 3820) loss: 1.205807
+(Epoch 8 / 10) train acc: 0.722000; val_acc: 0.620000
+(Iteration 3101 / 3820) loss: 1.142979
+(Iteration 3201 / 3820) loss: 1.081947
+(Iteration 3301 / 3820) loss: 0.978561
+(Iteration 3401 / 3820) loss: 1.166843
+(Epoch 9 / 10) train acc: 0.692000; val_acc: 0.623000
+(Iteration 3501 / 3820) loss: 0.887565
+(Iteration 3601 / 3820) loss: 0.890810
+(Iteration 3701 / 3820) loss: 1.083547
+(Iteration 3801 / 3820) loss: 1.037555
+(Epoch 10 / 10) train acc: 0.697000; val_acc: 0.628000

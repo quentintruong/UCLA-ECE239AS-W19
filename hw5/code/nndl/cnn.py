@@ -68,6 +68,13 @@ class ThreeLayerConvNet(object):
     self.params['b2'] = np.zeros(hidden_dim)
     self.params['W3'] = np.random.normal(0, weight_scale, [hidden_dim, num_classes])
     self.params['b3'] = np.zeros(num_classes)
+
+    if self.use_batchnorm:
+        self.bn_params = [{'mode': 'train', 'eps': 1e-5, 'momentum': 0.9} for i in np.arange(self.num_layers - 1)]
+        self.params['gamma1'] = np.ones(input_dim[0])
+        self.params['beta1'] = np.zeros(input_dim[0])
+        self.params['gamma2'] = np.ones()
+        self.params['beta2'] = np.zeros()
     # ================================================================ #
     # END YOUR CODE HERE
     # ================================================================ #
@@ -100,10 +107,24 @@ class ThreeLayerConvNet(object):
     #   Implement the forward pass of the three layer CNN.  Store the output
     #   scores as the variable "scores".
     # ================================================================ #
-    # conv - relu - 2x2 max pool - affine - relu - affine - softmax
-    p1, p1_cache = conv_relu_pool_forward(X, W1, b1, conv_param, pool_param) # a1 -> h1 -> p1
-    h2, h2_cache = affine_relu_forward(p1, W2, b2) # p1 -> a2 -> h2
-    scores, a3_cache = affine_forward(h2, W3, b3)
+    
+
+    
+    if not self.use_batchnorm:
+        # conv - relu - 2x2 max pool - affine - relu - affine - softmax
+        p1, p1_cache = conv_relu_pool_forward(X, W1, b1, conv_param, pool_param) # a1 -> h1 -> p1
+        h2, h2_cache = affine_relu_forward(p1, W2, b2) # p1 -> a2 -> h2
+        scores, a3_cache = affine_forward(h2, W3, b3)
+    else:
+        # conv - sbn - relu - 2x2 max pool - affine - bn - relu - affine - softmax
+        a, conv_cache = conv_forward_fast(x, w, b, conv_param)
+        out, cache = spatial_batchnorm_forward(x, gamma, beta, bn_param)
+        s, relu_cache = relu_forward(a)
+        out, pool_cache = max_pool_forward_fast(s, pool_param)
+        out, cache = affine_forward(x, w, b)
+        out, cache = batchnorm_forward(x, gamma, beta, bn_param)
+        s, relu_cache = relu_forward(a)
+        out, cache = affine_forward(x, w, b)
     # ================================================================ #
     # END YOUR CODE HERE
     # ================================================================ #
@@ -122,12 +143,15 @@ class ThreeLayerConvNet(object):
     loss, dx = softmax_loss(scores, y)
     loss += 0.5 * self.reg * np.sum([np.sum(self.params['W{}'.format(layer + 1)] ** 2) for layer in range(3)])
 
-    dl_dh2, grads['W3'], grads['b3'] = affine_backward(dx, a3_cache)
-    grads['W3'] += self.reg * self.params['W3']
-    dl_dp1, grads['W2'], grads['b2'] = affine_relu_backward(dl_dh2, h2_cache)
-    grads['W2'] += self.reg * self.params['W2']
-    dl_dx, grads['W1'], grads['b1'] = conv_relu_pool_backward(dl_dp1, p1_cache)
-    grads['W1'] += self.reg * self.params['W1']
+    if not self.use_batchnorm:
+        dl_dh2, grads['W3'], grads['b3'] = affine_backward(dx, a3_cache)
+        grads['W3'] += self.reg * self.params['W3']
+        dl_dp1, grads['W2'], grads['b2'] = affine_relu_backward(dl_dh2, h2_cache)
+        grads['W2'] += self.reg * self.params['W2']
+        dl_dx, grads['W1'], grads['b1'] = conv_relu_pool_backward(dl_dp1, p1_cache)
+        grads['W1'] += self.reg * self.params['W1']
+    else:
+        pass
     # ================================================================ #
     # END YOUR CODE HERE
     # ================================================================ #
