@@ -1,0 +1,86 @@
+=====================================================================================
+1. Creativity (7 points).
+How creative and/or diverse is the approach taken by the students? 
+Does the student implement / try various algorithms? 
+Are multiple architectures compared? An example of a project that we would count as creative is comparing e.g., a CNN and an RNN in decoding performance. 
+We recognize projects that implement at least two of the post-CNN algorithms as very creative. 
+Creativity may also result from how one tackles the design of these algorithms.
+
+2. Insight (7 points).
+Does the project reveal some insight about the choice of various parameters on the performance of the algorithm? 
+How about hyperparameters and architectures? 
+Is there reasonable insight into their results? (i.e., you should not just blindly apply different algorithms to a problem and compare them.)
+
+3. Performance (6 points).
+Does the project achieve relatively good performance on the problem, given that the students are training with a CPU (and may not have GPU access)? 
+How do different algorithms compare? 
+If the project is related to one’s research, how do results compare to the literature? (i.e., you should not just train a few different algorithms without optimizing them reasonably.) 
+We do recognize that students may not have access to GPUs; if this is a problem for your optimization, state it clearly in your results that you believe performance could be increased with more time; this should be apparent from e.g., a loss function plot with physical time on the x-axis (e.g., showing that after some number of hours, the loss had decreased, but still had a long way to go). We will account for this in grading your performance. Last year, students also had success using Google Colaboratory.
+
+4. Write-up (4 points).
+Are the approach, insight, and results clearly presented and explained? 
+Dissemination of results is an important component to any project.
+
+=====================================================================================
+=Abstract=
+=A brief description of what you did in the project and the results observed.=
+I implemented Q-Learning, Deep Q-Network, and Policy Gradient with the REINFORCE algorithm in Keras to solve the CartPole game from the OpenAI Gym environment. Each algorithm was able to find a solution with sufficient iterations; however, DQN and PG were unable to consistently stabilize on a solution, instead, they cycled on and off the solution. 
+=Introduction=
+=Do not use the introduction to formulate the general problem of EEG decoding (unless you are doing a project from your own research, in which case it should be brief), as we are all familiar with the EEG problem. Instead, use the introduction to set up and motivate the architectures you pursued and why.=
+
+CartPole is a canonical game environment from the OpenAI Gym where the goal is to balance a pendulum upright on a cart. The game has two inputs (corresponding to pushing the cart left or right) and four outputs (corresponding to horizontal position, horizontal velocity, angular position, and angular velocity). The game is solved by balancing the pendulum upright for an average of 195 frames or more within a constrained horizontal region for 100 consecutive games. 
+
+Reinforcement learning is a natural approach for building a CartPole solver because the CartPole environment assigns rewards based on the action taken in a particular state. Supervised learning was not considered because there is no labeled data to learn from. I chose to implement two value functions and one policy function, namely, Q-Learning, Deep Q-Learning, and Policy Gradient with REINFORCE. 
+
+First, in part because it serves as the basis for more advanced reinforcement learning, I start with Q-Learning. Here, we model our game as a Markov Decision Process (http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching_files/MDP.pdf). Because CartPole's output is continuous by default, we discretize each continuous value into bins; the precise way we discretize is treated as a hyperparemeter. These discrete output values form our finite set of states. CartPole's actions are discrete and serve as our finite set of actions. The state transition probabilities and reward function are both supplied by the CartPole environment. The discount factor is treated as a hyperparemeter. Our agent's policy is implicitly defined by the Q-table. We determine the optimal Q-table by iterating over the Bellman equation. 
+
+Second, I try a Deep Q-Network to solve CartPole. One advantage the DQN has over Q-Learning is that the state space may be very large, allowing for a much wider range of games to be played. For example, if we were to try Q-Learning on an Atari game with a preprocessed grayscale image of size 84x84x1, there are be 7056 pixels, each with 128 possible values (one for each shade of gray), resulting in 128 ^ 7056 states. Each state then has 18 possible actions (due to the Atari controller). This is well over the number of atoms in the universe and would not fit in memory, and even if it could, would be an inefficient use of the data due to correlation between states (https://arxiv.org/pdf/1312.5602v1.pdf). While the state space for CartPole is not large enough to require a DQN, I implemented one as an exercise, because ultimately, CartPole is largely for practice and validation of one's implementation before moving onto more interesting games. Since DQN's tend to be unstable, I also implemented experience replay and target network in an effort to stabilize the learning. 
+
+Third, I implemented Policy Gradient using the REINFORCE algorithm, which differs from Q-Learning and DQN in that it is a policy-function, meaning that it directly creates a policy, rather than implicitly from action-values of the Q-table. Interestingly, PG is able to learn stochastic policies, which is useful in dealing with aliased states (http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching_files/pg.pdf). Also, unlike a DQN, it works in  continuous action spaces. While CartPole does not require either of these, I implemented it as an exercise and experiment, similar to with the DQN. 
+
+=Results=
+=State the results of your experiments. Discussion. Discuss insights gained from your project, e.g., what resulted in good performance, and any hypotheses for why this might be the case.=
+I tested the Q-Learning, Deep Q-Network, and Policy Gradient algorithms on the CartPole-v0 environment for 1000 episodes per iteration, ending early if a solution is found. I measured the average time per iterations, average number of episodes per iteration, and plotted the distribution of when the solution was found. 
+
+First, for Q-Learning, I tested the impact of varying the number of buckets used for discretization, the epsilon update rule for the exploitation-exploration tradeoff, the learning rate, and the discount rate. Foremost, the number of buckets had the most significant impact of any hyperparemeter with respect to learning and convergence. In particular, setting the number of buckets for the horizontal position and horizontal velocity to one each seemed to both stabilize and accelerate convergence. This can be understood by the observation that the cart doesn't move very far within the 195 frames if the pendulum is upright (and so isn't relevant for winning the game); thus, we can reduce the dimensionality of the state space in half by effectively ignoring the first two outputs. 
+The next most important parameter is the epsilon update rule. Inspired by an update rule that many others were using, I initially started exploring using a bounded logarithmic decay (https://gist.github.com/n1try/2a6722407117e4d668921fce53845432, https://github.com/icoxfog417/cartpole-q-learning/blob/master/cartpole.py). I adjusted the bounds and the denominator inside the logarithm and saw some minor changes. Ultimately, I grew suspicious that the logarithm was really necessary, leading me to approximate it using a linear equation, which performed just as well as the others. 
+Similarly for the learning rate update rule, I initially used a bounded logarithmic decay but found that it was well substituted by a linear expression. 
+The discount rate seemed to have little effect unless below 0.90, at which point the DQN is unstable. With a discount of 0.90, the reward from 28 frames ahead having an impact of roughly 5% of what they'd have if the discount were 1.0; perhaps the DQN requires a discount greater than 0.90 because the effect of pushing the cart persists for more than 28 frames.
+
+Second, I tested the Deep Q-Network in a similar manner to with Q-Learning, with the exception of performing fewer tests and iterations because training the DQN is much slower. I tested the impact the impact of changing the optimizer and its learning rate, the model architecture, and the epsilon update rule. I found that the optimizer had a significant impact on stabilizing; in particular, low learning rates around 0.001 are essential. Learning rate decay was not found to be helpful; however, this may simply be due to a poor choice in other hyperparameters. More testing would be necessary to be sure, but I was unable to do this due to the long training times. In general, it seems that more hidden layers and units seemed to help the network stabilize on a solution. This may be because the solution can be redundantly encoded with more neurons. Ultimately, I was not able to find a set of parameters would consistently allow the DQN to stabilize on a solution in under 500 iterations. I believe that it would be possible given more computational power and time. 
+
+Third, I tested the Policy Gradient with REINFORCE similarly to as in previous sections. I tested the impact of varying the discount, learning rate, and model architecture. A discount rate around 0.90 empirically seemed to work well, although it did not completely stabilize optimization. One possible reason the discount rate affects stabilization is because it affects how much emphasis is placed on later rewards, and that having an incorrect discount rate will cause the algorithm to undervalue rewards from the most relevant frames. A learning rate of 0.007 using the Adam optimizer seems to be most stable, perhaps because of the topology of the solution space. And like with the DQN, having more neurons seems to help with stability, possibly by redundantly encoding the solution.
+
+
+
+
+
+
+
+
+
+
+
+for dqn, varied network architecture. as well as tune the learning rate and exploration-exploitation rate
+and experience replay
+also used target network, which was useful
+for pg, primary issue is again regarding convergence. so mess with optimizer a lot. 
+ql is way faster than the others in terms of running time
+
+=References=
+https://gist.github.com/greydanus/7cef68683ec955720ddde6b3edf8820e
+https://adgefficiency.com/dqn-debugging/
+https://medium.com/@jonathan_hui/rl-policy-gradients-explained-advanced-topic-20c2b81a9a8b
+http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching_files/XX.pdf - exploration vs exploitation tradeoff
+http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching_files/intro_RL.pdf
+=====================================================================================
+writeup, no more than 3 pages including figures. 
+References are excluded from the 3 pgs
+fine to be well below the page limit; this is the maximum
+submit your code
+submit two extra pages.
+One page should contain a table summarizing the performance of all algorithms they tested for the datasets they evaluated
+other page should summarize the architectures and details about the training 
+can think of this page as the “Methods” part of the paper. 
+You may reference these pages in the writeup 
+=====================================================================================

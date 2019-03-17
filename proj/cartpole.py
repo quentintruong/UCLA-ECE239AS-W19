@@ -3,14 +3,21 @@ from keras.models import clone_model
 from keras.models import load_model
 from keras.models import Sequential
 from keras.optimizers import Adam
+from keras.optimizers import Nadam
 from keras.losses import categorical_crossentropy
 from keras import backend as K
 import gym
 import matplotlib.pyplot as plt
 import numpy as np
+import tensorflow as tf
 
 from collections import deque
 import time
+import sys
+import os
+
+
+tf.logging.set_verbosity(tf.logging.ERROR)
 
 
 def time_run_plot(func, num_iters, bin_width, file_name, verbose):
@@ -21,11 +28,17 @@ def time_run_plot(func, num_iters, bin_width, file_name, verbose):
     results = []
     
     for i in range(num_iters):
+        sys.stdout.write("\rIteration: %d / %d, Time: %d" % (i, num_iters, time.time() - start))
+        sys.stdout.flush()
+
         results.append(func())
+    sys.stdout.write("\r")
+    sys.stdout.flush()
 
     if verbose > 0:
         print("Avg seconds per iteration: {}".format(str((time.time() - start) / num_iters)))
         print("Avg episodes per iteration: {}".format(str(np.mean(results))))
+        print()
     
     plt.hist(results, bins=range(min(results), max(results) + bin_width, bin_width))
     plt.xlabel('Episodes')
@@ -65,9 +78,6 @@ def QL(env, buckets, bucket_bounds, epsilon_update, lr_update, discount, max_epi
 
             next_state, reward, done, _ = env.step(action)
             next_state = state_to_bucket(buckets, bucket_bounds, next_state)
-
-            #if done: # if failed, add penalty
-            #    reward = -1
 
             # Bellman equation
             q_table[state + (action,)] += learning_rate * (reward + discount * np.max(q_table[next_state]) - q_table[state + (action,)])
@@ -200,72 +210,3 @@ def PG(env, model, discount, learning_rate, max_episodes, verbose):
 
 if __name__ == '__main__':
     env = gym.make('CartPole-v0')
-
-    ### QL ###
-    time_run_plot(  func=lambda:
-                        QL( env=env,
-                            buckets=(1, 1, 6, 3), 
-                            bucket_bounds=np.array([env.observation_space.high[0], .5, env.observation_space.high[2], np.radians(50)]),
-                            epsilon_update=lambda episode : max(0.1, min(1, 1.0 - np.log10((episode + 1) / 25))),
-                            lr_update=lambda episode : max(0.1, min(1.0, 1.0 - np.log10((episode + 1) / 25))),
-                            discount=1,
-                            max_episodes=1000,
-                            verbose=0,
-                        ),
-                    num_iters=0,
-                    bin_width=10,
-                    file_name='a',
-                    verbose=1)
-
-    time_run_plot(  func=lambda:
-                        QL( env=env,
-                            buckets=(3, 3, 6, 3), 
-                            bucket_bounds=np.array([env.observation_space.high[0], .5, env.observation_space.high[2], np.radians(50)]),
-                            epsilon_update=lambda episode : max(0.1, min(1, 1.0 - np.log10((episode + 1) / 25))),
-                            lr_update=lambda episode : max(0.1, min(1.0, 1.0 - np.log10((episode + 1) / 25))),
-                            discount=1,
-                            max_episodes=1000,
-                            verbose=0,
-                        ),
-                    num_iters=0,
-                    bin_width=10,
-                    file_name='b',
-                    verbose=1)
-
-    ### DQN ###
-    model = Sequential()
-    model.add(Dense(16, input_shape=(4, ), activation='relu'))
-    model.add(Dense(2, activation='linear'))
-    time_run_plot(  func=lambda:
-                        DQN(env=env, 
-                            model=model,
-                            compile=lambda obj : obj.compile(loss='mean_squared_error', optimizer=Adam(lr=0.001)),
-                            use_target=True,
-                            discount=0.90,
-                            epsilon_update=lambda episode : 1. / (episode / 10 + 1),
-                            target_update_freq=5,
-                            batch_size=64,
-                            replay_memory=50000,
-                            max_episodes=1000,
-                            verbose=1),
-                    num_iters=1,
-                    bin_width=20,
-                    file_name='b',
-                    verbose=1)
-
-    ### PG ###
-    model = Sequential()
-    model.add(Dense(128, input_shape=(4, ), activation='relu'))
-    #model.add(Dense(2, activation='relu'))
-    model.add(Dense(2, activation='softmax'))
-    time_run_plot(  func=lambda:
-                        PG( env=env, 
-                            model=model,
-                            discount=0.9,
-                            learning_rate=0.009,
-                            max_episodes=1000,
-                            verbose=1),
-                    num_iters=0,
-                    bin_width=20,
-                    file_name='a',
-                    verbose=1)
