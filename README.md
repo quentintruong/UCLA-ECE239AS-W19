@@ -1,5 +1,5 @@
 # UCLA-ECE239AS-W19
-# Neural Networks & Deep Learning - Professor Kao
+### Neural Networks & Deep Learning - Professor Kao
 
 Assignment | Score
 --- | --- |
