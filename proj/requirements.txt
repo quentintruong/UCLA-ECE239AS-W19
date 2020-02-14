@@ -32,7 +32,7 @@ PyOpenGL==3.1.0
 pyparsing==2.3.1
 python-dateutil==2.8.0
 PyWavelets==1.0.2
-PyYAML==3.13
+PyYAML==5.1
 requests==2.21.0
 scikit-image==0.14.2
 scipy==1.2.1
